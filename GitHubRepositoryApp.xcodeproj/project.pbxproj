@@ -14,6 +14,8 @@
 		9149ED59258B1C7D00B74351 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9149ED58258B1C7D00B74351 /* Preview Assets.xcassets */; };
 		9149ED5C258B1C7D00B74351 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9149ED5A258B1C7D00B74351 /* LaunchScreen.storyboard */; };
 		9149ED64258B2D0200B74351 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9149ED63258B2D0200B74351 /* HomeView.swift */; };
+		9149ED66258B5C9000B74351 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9149ED65258B5C9000B74351 /* SafariView.swift */; };
+		9149ED68258B64A700B74351 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9149ED67258B64A700B74351 /* Repository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		9149ED5B258B1C7D00B74351 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9149ED5D258B1C7D00B74351 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9149ED63258B2D0200B74351 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		9149ED65258B5C9000B74351 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		9149ED67258B64A700B74351 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 				9149ED4F258B1C7500B74351 /* AppDelegate.swift */,
 				9149ED51258B1C7500B74351 /* SceneDelegate.swift */,
 				9149ED63258B2D0200B74351 /* HomeView.swift */,
+				9149ED67258B64A700B74351 /* Repository.swift */,
+				9149ED65258B5C9000B74351 /* SafariView.swift */,
 				9149ED53258B1C7500B74351 /* CardView.swift */,
 				9149ED55258B1C7D00B74351 /* Assets.xcassets */,
 				9149ED5A258B1C7D00B74351 /* LaunchScreen.storyboard */,
@@ -153,6 +159,8 @@
 				9149ED64258B2D0200B74351 /* HomeView.swift in Sources */,
 				9149ED52258B1C7500B74351 /* SceneDelegate.swift in Sources */,
 				9149ED54258B1C7500B74351 /* CardView.swift in Sources */,
+				9149ED66258B5C9000B74351 /* SafariView.swift in Sources */,
+				9149ED68258B64A700B74351 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

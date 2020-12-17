@@ -27,7 +27,7 @@ struct CardView: View {
     }
     
     
-    let input: input
+    let input: Input
     
     
     init(input: Input) {
