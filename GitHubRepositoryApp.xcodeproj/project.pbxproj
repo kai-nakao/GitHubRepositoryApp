@@ -21,6 +21,7 @@
 		9149ED75258C22E800B74351 /* SearchRepositoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9149ED74258C22E800B74351 /* SearchRepositoryRequest.swift */; };
 		9149ED79258C911C00B74351 /* APIServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9149ED78258C911C00B74351 /* APIServiceError.swift */; };
 		9149ED7B258C915400B74351 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9149ED7A258C915400B74351 /* APIService.swift */; };
+		9149ED7D258DB1FA00B74351 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9149ED7C258DB1FA00B74351 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		9149ED74258C22E800B74351 /* SearchRepositoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryRequest.swift; sourceTree = "<group>"; };
 		9149ED78258C911C00B74351 /* APIServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceError.swift; sourceTree = "<group>"; };
 		9149ED7A258C915400B74351 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		9149ED7C258DB1FA00B74351 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				9149ED63258B2D0200B74351 /* HomeView.swift */,
+				9149ED7C258DB1FA00B74351 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				9149ED7B258C915400B74351 /* APIService.swift in Sources */,
 				9149ED54258B1C7500B74351 /* CardView.swift in Sources */,
 				9149ED66258B5C9000B74351 /* SafariView.swift in Sources */,
+				9149ED7D258DB1FA00B74351 /* HomeViewModel.swift in Sources */,
 				9149ED6C258C1E7B00B74351 /* SearchRepositoryResponse.swift in Sources */,
 				9149ED68258B64A700B74351 /* Repository.swift in Sources */,
 				9149ED75258C22E800B74351 /* SearchRepositoryRequest.swift in Sources */,

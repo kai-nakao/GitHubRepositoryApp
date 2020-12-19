@@ -16,8 +16,8 @@ struct ContentView: View {
 
 struct CardView: View {
     
-    struct input: Identifiable {
-        let id: UUID()
+    struct Input: Identifiable {
+        let id: UUID = UUID()
         let iconImage: UIImage
         let title: String
         let language: String
