@@ -47,7 +47,7 @@ final class HomeViewModel: ObservableObject {
             .flatMap { [apiService] (query) in
                 apiService.request(with: SearchRepositoryRequest(query: query))
                     .catch { [weak self] error -> Empty<SearchRepositoryResponse, Never> in
-                    self?.errorSubject.send(error)
+                    self?.errorSubject.send(error
                     return .init()
                 }
         }
@@ -64,5 +64,27 @@ final class HomeViewModel: ObservableObject {
             .assign(to: \.isLoading, on: self)
     }
     
-    private 
+    private func convertInput(repositories: [Repository]) -> [CardView.Input] {
+        return repositories.compactMap { (repo) -> CardView.Input? in
+            do {
+                guard let url = URL(string: repo.owner.avatarUrl) else {
+                    return nil
+                }
+                let data = try Data(contentsOf: url)
+                guard let image = UIImage(data: data) else { return nil }
+                return CardView.Input(
+                    iconImage: image,
+                    title: repo.name,
+                    language: repo.language,
+                    star: repo.star,
+                    description: repo.description,
+                    url: repo.htmlUrl
+                    
+                )
+                
+            } catch {
+                return nil
+            }
+        }
+    }
 }

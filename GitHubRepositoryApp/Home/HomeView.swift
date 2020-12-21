@@ -21,28 +21,35 @@ struct HomeView: View {
                     .foregroundColor(.gray)
                     .offset(x: 0, y: -200)
                     .navigationBarTitle("", displayMode: .inline)
-            }
-            ScrollView(showsIndicators: false) {
-                ForEach(cardViewInputs) { input in
-                    Button(action: {
-                    }) {
-                        CardView(input: input)
+            } else {
+                ScrollView(showsIndicators: false) {
+                    ForEach(cardViewInputs) {  input in
+                        Button(action: {
+                            viewModel.apply(inputs: .tappedCardView(urlString: input.url))
+                        }) {
+                            CardView(input: input)
+                        }
                     }
+                    
+                }
+                
+                .padding()
+                .navigationBarTitle("", displayMode: .inline)
+                .navigationBarItems(leading: HStack {
+                    TextField("検索キーワードを入力", text: $text, oncommit: {
+                        viewModel.apply(inputs: .oncommit(text: text))
+                    })
+                    
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keybordType(.asciiCapable)
+                        .frame(width: UIScreen.main.bounds.width - 40)
+                })
+                    .sheet(isPresented: $viewModel.isShowSheet) {
+                        SafariView(url: URL(string: viewModel.repositoryUrl)!)
+                        
                 }
                 
             }
-            
-            .padding()
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarItems(leading: HStack {
-                TextField("検索キーワードを入力", text: $text, oncommit: {
-                    viewModel.apply(inputs: .oncommit(text: text))
-                })
-                
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keybordType(.asciiCapable)
-                    .frame(width: UIScreen.main.bounds.width - 40)
-            })
         }
     }
 }
