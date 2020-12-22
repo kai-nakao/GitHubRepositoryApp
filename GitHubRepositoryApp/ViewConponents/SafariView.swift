@@ -18,9 +18,3 @@ struct SafariView: UIViewControllerRepresentable {
     func updateUIViewController(
         _ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {}
 }
-
-struct SafariView_Previews: PreviewProvider {
-    static var previews: some View {
-        SafariView()
-    }
-}

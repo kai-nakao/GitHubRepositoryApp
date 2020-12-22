@@ -8,6 +8,8 @@
 
 import Foundation
 import Combine
+import UIKit
+
 
 final class HomeViewModel: ObservableObject {
     
@@ -16,7 +18,7 @@ final class HomeViewModel: ObservableObject {
         case tappedCardView(urlString: String)
     }
     
-    @Published private var cardViewInputs: [CardView.Input] = []
+    @Published private(set) var cardViewInputs: [CardView.Input] = []
     @Published var inputText: String = ""
     @Published var isShowError = false
     @Published var isLoading = false
@@ -44,10 +46,10 @@ final class HomeViewModel: ObservableObject {
     
     private func bind() {
         let responseSubscriber = onCommitSubject
-            .flatMap { [apiService] (query) in
-                apiService.request(with: SearchRepositoryRequest(query: query))
-                    .catch { [weak self] error -> Empty<SearchRepositoryResponse, Never> in
-                    self?.errorSubject.send(error
+        .flatMap { [apiService] (query) in
+            apiService.request(with: SearchRepositoryRequest(query: query))
+                .catch { [weak self] error -> Empty<SearchRepositoryResponse, Never> in
+                    self?.errorSubject.send(error)
                     return .init()
                 }
         }
@@ -62,6 +64,13 @@ final class HomeViewModel: ObservableObject {
         let loadingStartSubscriber = onCommitSubject
             .map { _ in true }
             .assign(to: \.isLoading, on: self)
+        let errorSubscriber = errorSubject
+            .sink(receiveValue: { [weak self] (error) in
+                guard let self = self else { return }
+                self.isShowError = true
+                self.isLoading = false
+                
+            })
     }
     
     private func convertInput(repositories: [Repository]) -> [CardView.Input] {
@@ -76,7 +85,7 @@ final class HomeViewModel: ObservableObject {
                     iconImage: image,
                     title: repo.name,
                     language: repo.language,
-                    star: repo.star,
+                    star: repo.stargazersCount,
                     description: repo.description,
                     url: repo.htmlUrl
                     
