@@ -25,10 +25,6 @@ final class HomeViewModel: ObservableObject {
     @Published var isShowSheet = false
     @Published var repositoryUrl: String = ""
     
-    private let apiService: APIServiceType
-    private let onCommitSubject = PassthroughSubject<String, Never>()
-    private let responseSubject = PassthroughSubject<SearchRepositoryResponse, Never>()
-    private let errorSubject = PassthroughSubject<APIServiceError, Never>()
     
     init(apiService: APIServiceType) {
         self.apiService = apiService
@@ -37,40 +33,53 @@ final class HomeViewModel: ObservableObject {
     
     func apply(inputs: Inputs) {
         switch inputs {
-        case .onCommit(let inputText): onCommitSubject.send(inputText)
-        case .tappedCardView(let urlString):
-            repositoryUrl = urlString
-            isShowSheet = true
+            case .onCommit(let inputText): onCommitSubject.send(inputText)
+            case .tappedCardView(let urlString):
+                repositoryUrl = urlString
+                isShowSheet = true
         }
     }
     
+    private let apiService: APIServiceType
+    private let onCommitSubject = PassthroughSubject<String, Never>()
+    private let responseSubject = PassthroughSubject<SearchRepositoryResponse, Never>()
+    private let errorSubject = PassthroughSubject<APIServiceError, Never>()
+    private var cancellables: [AnyCancellable] = []
+    
     private func bind() {
         let responseSubscriber = onCommitSubject
-        .flatMap { [apiService] (query) in
-            apiService.request(with: SearchRepositoryRequest(query: query))
-                .catch { [weak self] error -> Empty<SearchRepositoryResponse, Never> in
-                    self?.errorSubject.send(error)
-                    return .init()
-                }
-        }
-        .map{ $0.items }
-        .sink(receiveValue: { [weak self] (repositories) in
-        guard let self = self else { return }
-            self.cardViewInputs = self.convertInput(repositories: repositories)
-            self.inputText = ""
-            self.isLoading = false
-        })
-        
+            .flatMap { [apiService] (query) in
+                apiService.request(with: SearchRepositoryRequest(query: query))
+                    .catch { [weak self] error -> Empty<SearchRepositoryResponse, Never> in
+                        self?.errorSubject.send(error)
+                        return .init()
+                    }
+            }
+            .map{ $0.items }
+            .sink(receiveValue: { [weak self] (repositories) in
+                guard let self = self else { return }
+                self.cardViewInputs = self.convertInput(repositories: repositories)
+                self.inputText = ""
+                self.isLoading = false
+            })
+
         let loadingStartSubscriber = onCommitSubject
             .map { _ in true }
             .assign(to: \.isLoading, on: self)
+
         let errorSubscriber = errorSubject
             .sink(receiveValue: { [weak self] (error) in
                 guard let self = self else { return }
                 self.isShowError = true
                 self.isLoading = false
                 
+        
             })
+        cancellables += [
+            responseSubscriber,
+            loadingStartSubscriber,
+            errorSubscriber
+        ]
     }
     
     private func convertInput(repositories: [Repository]) -> [CardView.Input] {
