@@ -14,7 +14,7 @@ import UIKit
 final class HomeViewModel: ObservableObject {
     
     enum Inputs {
-        case oncommit(text: String)
+        case onCommit(text: String)
         case tappedCardView(urlString: String)
     }
     
@@ -37,7 +37,7 @@ final class HomeViewModel: ObservableObject {
     
     func apply(inputs: Inputs) {
         switch inputs {
-        case .oncommit(let inputText): onCommitSubject.send(inputText)
+        case .onCommit(let inputText): onCommitSubject.send(inputText)
         case .tappedCardView(let urlString):
             repositoryUrl = urlString
             isShowSheet = true
